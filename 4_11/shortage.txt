@@ -1,0 +1,1 @@
+for the temperature conveter equation, it should be (9.0/5.0)*celeius+32,because if it is 9/5 the result will be 1 instead of 1.8

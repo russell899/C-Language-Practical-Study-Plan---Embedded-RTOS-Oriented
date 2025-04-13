@@ -1,0 +1,2 @@
+1. The continue statement skips the remaining code in the current loop iteration and jumps to the beginning of the next iteration.
+2.A variable declared(声明） inside an if statement is a temporary (local) variable and exists only within the scope of that block.
