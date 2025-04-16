@@ -1,0 +1,14 @@
+1. function parameters are stored in the stack memory during the function call
+
+The two main causes of wild pointers are:
+1.returning a pointer to a local variable:
+
+char* get_string() {
+    char str[] = "Hello";  // 局部变量
+    return str;  // 返回指向局部变量的指针，栈空间释放后该指针会变成野指针
+}
+
+2.accessing memory that has already been freed.
+int* ptr = (int*)malloc(sizeof(int));
+free(ptr);  // 释放内存
+*ptr = 10;  // 访问已释放的内存，变成野指针
