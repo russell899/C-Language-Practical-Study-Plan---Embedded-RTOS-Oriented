@@ -1,0 +1,34 @@
+#include "stm32f10x.h"    // Device header
+#include "Delay.h"
+
+//#define Set_BIT(port,bit)       *port &= ~(1<<bit);
+//#define Clear_BIT(port,bit)     *port |= 1<<bit;
+
+#define Set_BIT(port, bit)    ((port)->ODR |= (1 << (bit))) //ODR is an output register
+#define Clear_BIT(port, bit)  ((port)->ODR &= ~(1 << (bit)))
+
+
+int main(void)
+{
+	  GPIO_TypeDef * port = GPIOA;
+	  //uint32_t bit = 0;
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);//使能寄存器
+		GPIO_InitTypeDef GPIO_structure;//定义结构体
+		GPIO_structure.GPIO_Mode = GPIO_Mode_Out_PP;//使用推挽输出
+		GPIO_structure.GPIO_Pin = GPIO_Pin_0;
+		GPIO_structure.GPIO_Speed =GPIO_Speed_50MHz ;
+		GPIO_Init(GPIOA,&GPIO_structure);
+		while(1)
+		{
+			//GPIO_ResetBits(GPIOA,GPIO_Pin_0);//将PC13口置为低电平
+			//GPIO_WriteBit(GPIOA,GPIO_Pin_0,Bit_RESET);//低电平灯亮
+			Set_BIT(port,0);
+			Delay_ms(500);//延时500ms
+			//GPIO_WriteBit(GPIOA,GPIO_Pin_0,Bit_SET);//高电平灯灭
+			Clear_BIT(port,0);
+			Delay_ms(500);//延时500ms
+		}
+		
+} 
+	
+		
